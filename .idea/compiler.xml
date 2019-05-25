@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="net.dirtcraft.plugin.DirtCraft-Pokedex.api" target="1.8" />
+      <module name="net.dirtcraft.plugin.DirtCraft-Pokedex.main" target="1.8" />
+      <module name="net.dirtcraft.plugin.DirtCraft-Pokedex.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

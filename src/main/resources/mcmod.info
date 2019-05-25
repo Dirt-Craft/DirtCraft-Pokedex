@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "DirtCraft-Pokedex",
+    "name": "DirtCraft Pokedex",
+    "description": "Pokedex Rewards remade for DirtCraft",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://dirtcraft.net/",
+    "updateUrl": "",
+    "authorList": [
+      "juliann"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

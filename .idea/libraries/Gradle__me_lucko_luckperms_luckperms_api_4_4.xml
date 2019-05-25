@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: me.lucko.luckperms:luckperms-api:4.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.lucko.luckperms/luckperms-api/4.4/e0356ab83e426ff5e51b3c596ffac8750905af64/luckperms-api-4.4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.lucko.luckperms/luckperms-api/4.4/3fb1750e720cd0d759fa979c23e9e12c2cd6d4c5/luckperms-api-4.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.lucko.luckperms/luckperms-api/4.4/8139c6f51ff6a67913e68b02936f8fb5b52681c8/luckperms-api-4.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
