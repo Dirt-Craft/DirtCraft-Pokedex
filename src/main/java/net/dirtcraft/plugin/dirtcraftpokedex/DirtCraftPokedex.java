@@ -6,6 +6,7 @@ import net.dirtcraft.plugin.dirtcraftpokedex.Commands.Base;
 import net.dirtcraft.plugin.dirtcraftpokedex.Commands.Check;
 import net.dirtcraft.plugin.dirtcraftpokedex.Commands.Claim;
 import net.dirtcraft.plugin.dirtcraftpokedex.Commands.List;
+import net.dirtcraft.plugin.dirtcraftpokedex.Utility.CheckDex;
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.spec.CommandSpec;
@@ -74,6 +75,10 @@ public class DirtCraftPokedex {
 
         Sponge.getCommandManager().register(instance, base, "dirtdex", "dex", "pokedex", "pd");
         logger.info("Commands for " + container.getName() + " have been initialized");
+    }
+
+    public CheckDex checkDex() {
+        return new CheckDex();
     }
 
     public Text format(String message) {

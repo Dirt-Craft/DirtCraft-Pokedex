@@ -18,9 +18,11 @@ import org.spongepowered.api.text.Text;
 public class Claim implements CommandExecutor {
 
     private final DirtCraftPokedex main;
+    private final CheckDex checkDex;
 
-    public Claim(DirtCraftPokedex main) {
+    public Claim(DirtCraftPokedex main, CheckDex checkDex) {
         this.main = main;
+        this.checkDex = checkDex;
     }
 
     @Override
@@ -29,8 +31,6 @@ public class Claim implements CommandExecutor {
         if (source instanceof Player) {
             Player player = (Player) source;
             EntityPlayerMP entity = (EntityPlayerMP) source;
-
-            CheckDex checkDex = new CheckDex();
 
             int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
             double percent = Double.valueOf(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length - 2.0D) * 100.0D));
@@ -54,7 +54,12 @@ public class Claim implements CommandExecutor {
                         "&c&l» &7You currently do &cnot &7have a rankup available"
                         + "\n"));
 
-                if (LuckPerms.getApiSafe().isPresent() && !LuckPerms.getApiSafe().get().getUser(player.getUniqueId()).getPrimaryGroup().isEmpty()) {
+                if (!LuckPerms.getApiSafe().isPresent()) {
+                    pagination.sendTo(player);
+                    return CommandResult.empty();
+                }
+
+                try {
                     String rank = LuckPerms.getApiSafe().get().getUser(player.getUniqueId()).getPrimaryGroup();
                     rank = rank.substring(0, 1).toUpperCase() + rank.substring(1);
                     if (rank.toLowerCase().contains("pokemaster")) {
@@ -65,13 +70,9 @@ public class Claim implements CommandExecutor {
                                         .append(main.format("&7Current Rank&8: &6" + pokemaster))
                                         .build());
 
-                    } else {
-                        pagination.footer(
-                                Text.builder()
-                                        .append(main.format("&7Current Rank&8: &6" + rank))
-                                        .build());
-
                     }
+                } catch (NullPointerException exception) {
+                    exception.printStackTrace();
                 }
 
                 pagination.sendTo(player);

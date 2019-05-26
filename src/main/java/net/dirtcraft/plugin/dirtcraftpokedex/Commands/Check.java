@@ -16,9 +16,11 @@ import org.spongepowered.api.service.pagination.PaginationList;
 public class Check implements CommandExecutor {
 
     private final DirtCraftPokedex main;
+    private final CheckDex checkDex;
 
-    public Check(DirtCraftPokedex main) {
+    public Check(DirtCraftPokedex main, CheckDex checkDex) {
         this.main = main;
+        this.checkDex = checkDex;
     }
 
     @Override
@@ -27,7 +29,6 @@ public class Check implements CommandExecutor {
             Player player = (Player) source;
             EntityPlayerMP entity = (EntityPlayerMP) source;
 
-            CheckDex checkDex = new CheckDex();
 
             int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
             double percent = Double.valueOf(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length - 2.0D) * 100.0D));

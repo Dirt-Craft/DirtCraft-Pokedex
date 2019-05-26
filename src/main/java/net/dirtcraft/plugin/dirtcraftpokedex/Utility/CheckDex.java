@@ -20,18 +20,24 @@ import org.spongepowered.api.util.Color;
 
 import java.util.ArrayList;
 
-public class CheckDex extends DirtCraftPokedex {
+public class CheckDex {
+    
+    private final DirtCraftPokedex main;
+    
+    public CheckDex(DirtCraftPokedex main) {
+        this.main = main;
+    }
 
     public void checkDex(Player player) {
 
         EntityPlayerMP entity = (EntityPlayerMP) player;
 
         int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
-        double percent = Double.valueOf(decimalFormat.format((double) caught / ((double) EnumSpecies.values().length - 2.0D) * 100.0D));
+        double percent = Double.valueOf(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length - 2.0D) * 100.0D));
 
         PaginationList.Builder pagination = PaginationList.builder();
-        pagination.title(format("&cDirtCraft &bPokédex"));
-        pagination.padding(format("&7&m-"));
+        pagination.title(main.format("&cDirtCraft &bPokédex"));
+        pagination.padding(main.format("&7&m-"));
 
         if (percent == 100 && !player.hasPermission("group.pokemaster")) {
 
@@ -58,13 +64,13 @@ public class CheckDex extends DirtCraftPokedex {
 
     public void onRankup(String rank, int percent, Player player, PaginationList.Builder pagination) {
         ArrayList<Text> contents = new ArrayList<>();
-        contents.add(format(""));
-        contents.add(format("&c&l» &aCongratulations! &7You have completed &b" + percent + "% &7of the Pokédex and have been ranked up to &a" + rank));
-        contents.add(format(""));
+        contents.add(main.format(""));
+        contents.add(main.format("&c&l» &aCongratulations! &7You have completed &b" + percent + "% &7of the Pokédex and have been ranked up to &a" + rank));
+        contents.add(main.format(""));
         pagination.contents(contents);
         pagination.footer(Text.builder()
-                .append(format("&8[&5&nClick me&d Activate Kit " + rank + "&8]"))
-                .onHover(TextActions.showText(format("&6Are you sure you want to activate &dKit PokéMaster&6?\n&7You can do this later by using &a&n&o/kit " + rank.toLowerCase().replace("é", "e"))))
+                .append(main.format("&8[&5&nClick me&d Activate Kit " + rank + "&8]"))
+                .onHover(TextActions.showText(main.format("&6Are you sure you want to activate &dKit PokéMaster&6?\n&7You can do this later by using &a&n&o/kit " + rank.toLowerCase().replace("é", "e"))))
                 .onClick(TextActions.runCommand("/kit " + rank.toLowerCase().replace("é", "e")))
                 .build());
 
@@ -82,7 +88,7 @@ public class CheckDex extends DirtCraftPokedex {
 
         Sponge.getServer().getOnlinePlayers().forEach(online -> {
             if (!online.equals(player)) {
-                online.sendMessage(format("&c&l» &6" + player.getName() + " &7has completed &b" + percent + "% &7of the Pokédex and ranked up to &a" + rank));
+                online.sendMessage(main.format("&c&l» &6" + player.getName() + " &7has completed &b" + percent + "% &7of the Pokédex and ranked up to &a" + rank));
             }
         });
     }
@@ -90,11 +96,11 @@ public class CheckDex extends DirtCraftPokedex {
     public void onCheck(String rank, double percent, Player player, EntityPlayerMP entity, PaginationList.Builder pagination) {
 
         pagination.contents(Text.builder()
-                .append(format("\n" +
+                .append(main.format("\n" +
                         "&7You are currently a &6" + rank + "&7"
                         + "\n"))
                 .onHover(TextActions.showText(
-                        format("&7You have completed &6" + percent + "% &7of the Pokédex and are a &6" + rank)))
+                        main.format("&7You have completed &6" + percent + "% &7of the Pokédex and are a &6" + rank)))
                 .build());
 
         if (LuckPerms.getApiSafe().isPresent()) {
@@ -105,8 +111,8 @@ public class CheckDex extends DirtCraftPokedex {
 
                 pagination.footer(
                         Text.builder()
-                                .append(format("&7[&dHover for Information&7]"))
-                                .onHover(TextActions.showText(format(
+                                .append(main.format("&7[&dHover for Information&7]"))
+                                .onHover(TextActions.showText(main.format(
                                         "&7Rank&8: &6" + pokemaster + "\n" +
                                                 "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                                 "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
@@ -116,8 +122,8 @@ public class CheckDex extends DirtCraftPokedex {
             } else {
                 pagination.footer(
                         Text.builder()
-                                .append(format("&7[&dHover for Information&7]"))
-                                .onHover(TextActions.showText(format(
+                                .append(main.format("&7[&dHover for Information&7]"))
+                                .onHover(TextActions.showText(main.format(
                                         "&7Rank&8: &6" + lpRank + "\n" +
                                                 "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                                 "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +

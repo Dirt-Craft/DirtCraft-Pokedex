@@ -52,7 +52,12 @@ public class List implements CommandExecutor {
                     pagination.title(main.format("&cDirtCraft &bPokédex"));
                     pagination.padding(main.format("&7&m-"));
                     pagination.contents(contents);
-            if (LuckPerms.getApiSafe().isPresent()) {
+
+            if (!LuckPerms.getApiSafe().isPresent()) {
+                pagination.build().sendTo(player);
+                return CommandResult.empty();
+            }
+            try {
                 String lpRank = LuckPerms.getApiSafe().get().getUser(player.getUniqueId()).getPrimaryGroup();
                 lpRank = lpRank.substring(0, 1).toUpperCase() + lpRank.substring(1);
                 if (lpRank.toLowerCase().equalsIgnoreCase("pokemaster")) {
@@ -65,22 +70,21 @@ public class List implements CommandExecutor {
                                             "&7Rank&8: &6" + pokemaster + "\n" +
                                                     "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                                     "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                    "&7Total Pokémon&8: &6" + EnumSpecies.values().length)))
+                                                    "&7Total Pokémon&8: &6" + (EnumSpecies.values().length - 2.0D))))
                                     .build());
 
-                } else {
+                }
+            } catch (NullPointerException exception) {
                     pagination.footer(
                             Text.builder()
                                     .append(main.format("&7[&dHover for Information&7]"))
                                     .onHover(TextActions.showText(main.format(
-                                            "&7Rank&8: &6" + lpRank + "\n" +
                                                     "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                                     "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                    "&7Total Pokémon&8: &6" + EnumSpecies.values().length)))
+                                                    "&7Total Pokémon&8: &6" + (EnumSpecies.values().length - 2.0D))))
                                     .build());
 
                 }
-            }
                     pagination.build().sendTo(player);
 
             return CommandResult.success();
