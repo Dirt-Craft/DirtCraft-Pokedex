@@ -36,8 +36,6 @@ public class CheckDex {
         double percent = Double.valueOf(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length - 2.0D) * 100.0D));
 
         PaginationList.Builder pagination = PaginationList.builder();
-        pagination.title(main.format("&cDirtCraft &bPokédex"));
-        pagination.padding(main.format("&7&m-"));
 
         if (percent == 100 && !player.hasPermission("group.pokemaster")) {
 
@@ -67,12 +65,25 @@ public class CheckDex {
         contents.add(main.format(""));
         contents.add(main.format("&c&l» &aCongratulations! &7You have completed &b" + percent + "% &7of the Pokédex and have been ranked up to &a" + rank));
         contents.add(main.format(""));
+
         pagination.contents(contents);
-        pagination.footer(Text.builder()
-                .append(main.format("&8[&5&nClick me&d Activate Kit " + rank + "&8]"))
-                .onHover(TextActions.showText(main.format("&6Are you sure you want to activate &dKit PokéMaster&6?\n&7You can do this later by using &a&n&o/kit " + rank.toLowerCase().replace("é", "e"))))
-                .onClick(TextActions.runCommand("/kit " + rank.toLowerCase().replace("é", "e")))
-                .build());
+
+        pagination.title(main.format("&cDirtCraft &bPokédex"));
+        pagination.padding(main.format("&4&m-"));
+
+        if (rank.toLowerCase().equals("PokéMaster".toLowerCase())) {
+            pagination.footer(Text.builder()
+                    .append(main.format("&8[&5&nClick me&d Activate Kit " + rank + "&8]"))
+                    .onHover(TextActions.showText(main.format("&6Are you sure you want to activate &6kit PokéMaster&6?\n&7You can do this later by using &a&n&o/kit " + rank.toLowerCase().replace("é", "e"))))
+                    .onClick(TextActions.runCommand("/kit " + rank.toLowerCase().replace("é", "e")))
+                    .build());
+        } else {
+            pagination.footer(Text.builder()
+                    .append(main.format("&8[&5&nClick me&d Activate Kit " + rank + "&8]"))
+                    .onHover(TextActions.showText(main.format("&6Are you sure you want to activate &6kit " + rank + " &6?\n&7You can do this later by using &a&n&o/kit " + rank.toLowerCase().replace("é", "e"))))
+                    .onClick(TextActions.runCommand("/kit " + rank.toLowerCase().replace("é", "e")))
+                    .build());
+        }
 
         FireworkEffect fireworkEffect = FireworkEffect.builder()
                 .color(Color.mixColors(Color.RED, Color.BLACK, Color.WHITE))
@@ -86,6 +97,8 @@ public class CheckDex {
 
         player.getWorld().spawnEntity(firework);
 
+        pagination.build().sendTo(player);
+
         Sponge.getServer().getOnlinePlayers().forEach(online -> {
             if (!online.equals(player)) {
                 online.sendMessage(main.format("&c&l» &6" + player.getName() + " &7has completed &b" + percent + "% &7of the Pokédex and ranked up to &a" + rank));
@@ -94,6 +107,9 @@ public class CheckDex {
     }
 
     public void onCheck(String rank, double percent, Player player, EntityPlayerMP entity, PaginationList.Builder pagination) {
+
+        pagination.title(main.format("&cDirtCraft &bPokédex"));
+        pagination.padding(main.format("&4&m-"));
 
         pagination.contents(Text.builder()
                 .append(main.format("\n" +
@@ -116,7 +132,7 @@ public class CheckDex {
                                         "&7Rank&8: &6" + pokemaster + "\n" +
                                                 "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                                 "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                "&7Total Pokémon&8: &6" + EnumSpecies.values().length)))
+                                                "&7Total Pokémon&8: &6" + main.decimalFormat.format(EnumSpecies.values().length - 2.0D))))
                                 .build());
 
             } else {
@@ -127,7 +143,7 @@ public class CheckDex {
                                         "&7Rank&8: &6" + lpRank + "\n" +
                                                 "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                                 "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                "&7Total Pokémon&8: &6" + EnumSpecies.values().length)))
+                                                "&7Total Pokémon&8: &6" + main.decimalFormat.format(EnumSpecies.values().length - 2.0D))))
                                 .build());
 
             }

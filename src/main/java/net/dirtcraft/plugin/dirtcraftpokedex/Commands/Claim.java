@@ -36,8 +36,6 @@ public class Claim implements CommandExecutor {
             double percent = Double.valueOf(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length - 2.0D) * 100.0D));
 
             PaginationList.Builder pagination = PaginationList.builder();
-            pagination.title(main.format("&cDirtCraft &bPokédex"));
-            pagination.padding(main.format("&8&m-"));
 
             if (percent == 100 && !player.hasPermission("group.pokemaster")) {
                 checkDex.onRankup("PokéMaster", 100, player, pagination);

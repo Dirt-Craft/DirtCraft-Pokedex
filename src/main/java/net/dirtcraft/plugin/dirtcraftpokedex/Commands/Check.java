@@ -35,9 +35,6 @@ public class Check implements CommandExecutor {
 
             PaginationList.Builder pagination = PaginationList.builder();
 
-            pagination.title(main.format("&cDirtCraft &bPokédex"));
-            pagination.padding(main.format("&7&m-"));
-
             if (percent == 100 && !player.hasPermission("group.pokemaster")) {
 
                 checkDex.onCheck("Pokémaster", percent, player, entity, pagination);
