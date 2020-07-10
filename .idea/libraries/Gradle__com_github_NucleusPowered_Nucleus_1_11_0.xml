@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.NucleusPowered:Nucleus:1.11.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.4.1-all/caches/modules-2/files-2.1/com.github.NucleusPowered/Nucleus/1.11.0/9f3733c08da5aff6b163befd1b008cec5b89ffdc/Nucleus-1.11.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.4.1-all/caches/modules-2/files-2.1/com.github.NucleusPowered/Nucleus/1.11.0/6bfaead1b7c5b5b3d0a7db3959b7212a6fdf4711/Nucleus-1.11.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.4.1-all/caches/modules-2/files-2.1/com.github.NucleusPowered/Nucleus/1.11.0/42a1d903e67a40d0a671f6ee2d70fa2c2396d057/Nucleus-1.11.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

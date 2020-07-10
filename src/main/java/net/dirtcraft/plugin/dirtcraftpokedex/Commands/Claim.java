@@ -1,11 +1,15 @@
 package net.dirtcraft.plugin.dirtcraftpokedex.Commands;
 
 import com.pixelmonmod.pixelmon.Pixelmon;
-import com.pixelmonmod.pixelmon.enums.EnumSpecies;
+import com.pixelmonmod.pixelmon.pokedex.Pokedex;
+import io.github.nucleuspowered.nucleus.api.NucleusAPI;
+import io.github.nucleuspowered.nucleus.api.exceptions.KitRedeemException;
 import me.lucko.luckperms.LuckPerms;
 import net.dirtcraft.plugin.dirtcraftpokedex.DirtCraftPokedex;
 import net.dirtcraft.plugin.dirtcraftpokedex.Utility.CheckDex;
+import net.dirtcraft.plugin.dirtcraftpokedex.Utility.Utility;
 import net.minecraft.entity.player.EntityPlayerMP;
+import org.apache.commons.lang3.text.WordUtils;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -13,10 +17,10 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.service.pagination.PaginationList;
-import org.spongepowered.api.text.Text;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Claim implements CommandExecutor {
-
     private final DirtCraftPokedex main;
     private final CheckDex checkDex;
 
@@ -25,62 +29,160 @@ public class Claim implements CommandExecutor {
         this.checkDex = checkDex;
     }
 
-    @Override
     public CommandResult execute(CommandSource source, CommandContext args) throws CommandException {
-
         if (source instanceof Player) {
-            Player player = (Player) source;
-            EntityPlayerMP entity = (EntityPlayerMP) source;
-
+            Player player = (Player)source;
+            EntityPlayerMP entity = (EntityPlayerMP)source;
+            
+            AtomicBoolean redeemedKit = new AtomicBoolean(false);
             int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
-            double percent = Double.valueOf(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length - 2.0D) * 100.0D));
-
+            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) Pokedex.pokedexSize) * 100.0D));
             PaginationList.Builder pagination = PaginationList.builder();
+            if (percent == 100.0D) {
+                if (player.hasPermission("group.pokemaster")) {
+                    NucleusAPI.getKitService().ifPresent((kitService) -> {
+                        kitService.getKit("PokeMaster").ifPresent((kit) -> {
+                            try {
+                                kit.redeem(player);
+                                player.sendMessage(this.main.format("&7You have successfully &aredeemed&7 kit &6PokéMaster"));
+                                redeemedKit.set(true);
+                            } catch (KitRedeemException var5) {
+                            }
 
-            if (percent == 100 && !player.hasPermission("group.pokemaster")) {
-                checkDex.onRankup("PokéMaster", 100, player, pagination);
-            } else if (percent < 100 && percent >= 70 && !player.hasPermission("group.ace")) {
-                checkDex.onRankup("Ace", 70, player, pagination);
-            } else if (percent < 70 && percent >= 50 && !player.hasPermission("group.expert")) {
-                checkDex.onRankup("Expert", 50, player, pagination);
-            } else if (percent < 50 && percent >= 30 && !player.hasPermission("group.knowledgable")) {
-                checkDex.onRankup("Knowledgable", 30, player, pagination);
-            } else if (percent < 30 && percent >= 10 && !player.hasPermission("group.intermedius")) {
-                checkDex.onRankup("Intermedius", 10, player, pagination);
-            } else {
-                pagination.contents(main.format("\n" +
-                        "&c&l» &7You currently do &cnot &7have a rankup available"
-                        + "\n"));
-
-                if (!LuckPerms.getApiSafe().isPresent()) {
-                    pagination.sendTo(player);
-                    return CommandResult.empty();
-                }
-
-                try {
-                    String rank = LuckPerms.getApiSafe().get().getUser(player.getUniqueId()).getPrimaryGroup();
-                    rank = rank.substring(0, 1).toUpperCase() + rank.substring(1);
-                    if (rank.toLowerCase().contains("pokemaster")) {
-                        String pokemaster = "PokéMaster";
-
-                        pagination.footer(
-                                Text.builder()
-                                        .append(main.format("&7Current Rank&8: &6" + pokemaster))
-                                        .build());
-
+                        });
+                    });
+                    if (redeemedKit.get()) {
+                        return CommandResult.success();
                     }
-                } catch (NullPointerException exception) {
-                    exception.printStackTrace();
+
+                    this.noRankup(pagination, player);
+                } else {
+                    this.checkDex.onRankup("PokéMaster", "Ace", 100, player, pagination);
                 }
 
-                pagination.sendTo(player);
+                return CommandResult.success();
+            } else if (percent < 100.0D && percent >= 70.0D) {
+                if (player.hasPermission("group.ace")) {
+                    NucleusAPI.getKitService().ifPresent((kitService) -> {
+                        kitService.getKit("Ace").ifPresent((kit) -> {
+                            try {
+                                kit.redeem(player);
+                                player.sendMessage(this.main.format("&7You have successfully &aredeemed&7 kit &6Ace"));
+                                redeemedKit.set(true);
+                            } catch (KitRedeemException ignored) {
+                            }
+
+                        });
+                    });
+                    if (redeemedKit.get()) {
+                        return CommandResult.success();
+                    }
+
+                    this.noRankup(pagination, player);
+                } else {
+                    this.checkDex.onRankup("Ace", "Expert", 70, player, pagination);
+                }
+
+                return CommandResult.success();
+            } else if (percent < 70.0D && percent >= 50.0D) {
+                if (player.hasPermission("group.expert")) {
+                    NucleusAPI.getKitService().ifPresent((kitService) -> {
+                        kitService.getKit("Expert").ifPresent((kit) -> {
+                            try {
+                                kit.redeem(player);
+                                player.sendMessage(this.main.format("&7You have successfully &aredeemed&7 kit &6Expert"));
+                                redeemedKit.set(true);
+                            } catch (KitRedeemException ignored) {
+                            }
+
+                        });
+                    });
+                    if (redeemedKit.get()) {
+                        return CommandResult.success();
+                    }
+
+                    this.noRankup(pagination, player);
+                } else {
+                    this.checkDex.onRankup("Expert", "Knowledgeable", 50, player, pagination);
+                }
+
+                return CommandResult.success();
+            } else if (percent < 50.0D && percent >= 30.0D) {
+                if (player.hasPermission("group.knowledgeable")) {
+                    NucleusAPI.getKitService().ifPresent((kitService) -> {
+                        kitService.getKit("Knowledgeable").ifPresent((kit) -> {
+                            try {
+                                kit.redeem(player);
+                                player.sendMessage(this.main.format("&7You have successfully &aredeemed&7 kit &6Knowledgeable"));
+                                redeemedKit.set(true);
+                            } catch (KitRedeemException ignored) {
+                            }
+
+                        });
+                    });
+                    if (redeemedKit.get()) {
+                        return CommandResult.success();
+                    }
+
+                    this.noRankup(pagination, player);
+                } else {
+                    this.checkDex.onRankup("Knowledgeable", "Intermedius", 30, player, pagination);
+                }
+
+                return CommandResult.success();
+            } else if (percent < 30.0D && percent >= 10.0D) {
+                if (player.hasPermission("group.intermedius")) {
+                    NucleusAPI.getKitService().ifPresent((kitService) -> {
+                        kitService.getKit("Intermedius").ifPresent((kit) -> {
+                            try {
+                                kit.redeem(player);
+                                player.sendMessage(this.main.format("&7You have successfully &aredeemed&7 kit &6Intermedius"));
+                                redeemedKit.set(true);
+                            } catch (KitRedeemException ignored) {
+                            }
+
+                        });
+                    });
+                    if (redeemedKit.get()) {
+                        return CommandResult.success();
+                    }
+
+                    this.noRankup(pagination, player);
+                } else {
+                    this.checkDex.onRankup("Intermedius", (String)null, 10, player, pagination);
+                }
+
+                return CommandResult.success();
+            } else {
+                NucleusAPI.getKitService().ifPresent((kitService) -> {
+                    kitService.getKit("Rookie").ifPresent((kit) -> {
+                        try {
+                            kit.redeem(player);
+                            player.sendMessage(this.main.format("&7You have successfully &aredeemed&7 kit &6Rookie"));
+                            redeemedKit.set(true);
+                        } catch (KitRedeemException ignored) {
+                        }
+
+                    });
+                });
+                if (!redeemedKit.get()) {
+                    this.noRankup(pagination, player);
+                }
+                return CommandResult.success();
             }
-
         } else {
-            throw new CommandException(main.format("&cOnly a player can claim Pokédex rewards"));
+            throw new CommandException(this.main.format("&cOnly a player can claim Pokédex rewards"));
         }
-
-        return CommandResult.success();
     }
 
+    private void noRankup(PaginationList.Builder pagination, Player player) {
+        pagination.title(this.main.format("&cDirtCraft &7Pokédex"));
+        pagination.padding(this.main.format("&4&m-"));
+        pagination.contents(this.main.format("\n&c&l» &7You currently do &cnot &7have any rewards available!\n"));
+        String rank = WordUtils.capitalizeFully(LuckPerms.getApi().getUser(player.getUniqueId()).getPrimaryGroup());
+        if (rank.equalsIgnoreCase("default")) rank = "Rookie";
+        if (rank.equalsIgnoreCase("pokemaster")) rank = "PokéMaster";
+        pagination.footer(Utility.format("&7Current Rank&8: &6" + rank));
+        pagination.sendTo(player);
+    }
 }

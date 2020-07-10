@@ -91,13 +91,17 @@ public class DirtCraftPokedex {
                 .build();
 
         Sponge.getCommandManager().register(instance, base, "dirtdex", "dex", "pokedex", "pd");
-        Sponge.getCommandManager().register(instance, fakeDex, "fakedex");
+        //Sponge.getCommandManager().register(instance, fakeDex, "fakedex");
         Sponge.getCommandManager().register(instance, pokemon, "pokemon", "pixelmon");
         logger.info("Commands for " + container.getName() + " have been initialized");
     }
 
     public Text format(String message) {
         return TextSerializers.FORMATTING_CODE.deserialize(message);
+    }
+
+    public Logger getLogger() {
+        return logger;
     }
 
 }

@@ -6,6 +6,7 @@ import com.pixelmonmod.pixelmon.pokedex.Pokedex;
 import me.lucko.luckperms.LuckPerms;
 import net.dirtcraft.plugin.dirtcraftpokedex.DirtCraftPokedex;
 import net.minecraft.entity.player.EntityPlayerMP;
+import org.apache.commons.lang3.text.WordUtils;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -38,7 +39,7 @@ public class List implements CommandExecutor {
             ArrayList<Text> contents = new ArrayList<>();
 
             int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
-            double percent = Double.valueOf(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length - 2.0D) * 100.0D));
+            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) Pokedex.pokedexSize) * 100.0D));
 
             Pokedex playerDex = Pixelmon.storageManager.getParty(entity).pokedex;
 
@@ -76,40 +77,26 @@ public class List implements CommandExecutor {
 
 
             try {
-                String lpRank = LuckPerms.getApiSafe().get().getUser(player.getUniqueId()).getPrimaryGroup();
-                lpRank = lpRank.substring(0, 1).toUpperCase() + lpRank.substring(1);
-                if (lpRank.toLowerCase().equalsIgnoreCase("pokemaster")) {
-                    String pokemaster = "PokéMaster";
-
-                    pagination.footer(
-                            Text.builder()
-                                    .append(main.format("&8[&dHover for Information&8]"))
-                                    .onHover(TextActions.showText(main.format(
-                                            "&7Rank&8: &6" + pokemaster + "\n" +
-                                                    "&7Pokédex Complete&8: &6" + percent + "%\n" +
-                                                    "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                    "&7Total Pokémon&8: &6" + main.decimalFormat.format(EnumSpecies.values().length - 2.0D))))
-                                    .build());
-
-                } else {
-                    pagination.footer(
-                            Text.builder()
-                                    .append(main.format("&8[&dHover for Information&8]"))
-                                    .onHover(TextActions.showText(main.format(
-                                            "&7Rank&8: &6" + lpRank + "\n" +
-                                                    "&7Pokédex Complete&8: &6" + percent + "%\n" +
-                                                    "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                    "&7Total Pokémon&8: &6" + main.decimalFormat.format(EnumSpecies.values().length - 2.0D))))
-                                    .build());
-                }
-            } catch (NullPointerException exception) {
+                String lpRank = WordUtils.capitalize(LuckPerms.getApiSafe().get().getUser(player.getUniqueId()).getPrimaryGroup());
+                if (lpRank.equalsIgnoreCase("default")) lpRank = "Rookie";
+                String pokemaster = "PokéMaster";
+                pagination.footer(
+                        Text.builder()
+                                .append(main.format("&8[&dHover for Information&8]"))
+                                .onHover(TextActions.showText(main.format(
+                                        "&7Rank&8: &6" + (lpRank.equalsIgnoreCase("pokemaster") ? pokemaster : lpRank) + "\n" +
+                                                "&7Pokédex Complete&8: &6" + percent + "%\n" +
+                                                "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
+                                                "&7Total Pokémon&8: &6" + Pokedex.pokedexSize)))
+                                .build());
+            } catch (Exception exception) {
                     pagination.footer(
                             Text.builder()
                                     .append(main.format("&8[&dHover for Information&8]"))
                                     .onHover(TextActions.showText(main.format(
                                                     "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                                     "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                    "&7Total Pokémon&8: &6" + main.decimalFormat.format(EnumSpecies.values().length - 2.0D))))
+                                                    "&7Total Pokémon&8: &6" + Pokedex.pokedexSize)))
                                     .build());
 
                 }

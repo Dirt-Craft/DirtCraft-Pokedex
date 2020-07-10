@@ -7,10 +7,14 @@ import org.spongepowered.api.entity.living.player.Player;
 
 public class ForgeEvents {
 
+    private final CheckDex checkDex;
+
+    public ForgeEvents(CheckDex checkDex) {
+     this.checkDex = checkDex;
+    }
+
     @SubscribeEvent
     public void onPixelmonReceived(PixelmonReceivedEvent event) {
-
-        CheckDex checkDex = new CheckDex();
 
         Player player = (Player) event.player;
 

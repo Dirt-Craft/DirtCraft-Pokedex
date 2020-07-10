@@ -33,7 +33,7 @@ public class FakeDex implements CommandExecutor {
             if (!context.getOne("player").isPresent()) {
                 Player player = (Player) source;
                 PaginationList.Builder pagination = PaginationList.builder();
-                checkDex.onRankup("Test Rank", 100, player, pagination);
+                checkDex.onRankup("Test Rank", null, 100, player, pagination);
             } else {
                 checkDex.checkDex(context.<Player>getOne("player").get());
             }

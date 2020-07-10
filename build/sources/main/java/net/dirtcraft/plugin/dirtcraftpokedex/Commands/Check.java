@@ -1,7 +1,7 @@
 package net.dirtcraft.plugin.dirtcraftpokedex.Commands;
 
 import com.pixelmonmod.pixelmon.Pixelmon;
-import com.pixelmonmod.pixelmon.enums.EnumSpecies;
+import com.pixelmonmod.pixelmon.pokedex.Pokedex;
 import net.dirtcraft.plugin.dirtcraftpokedex.DirtCraftPokedex;
 import net.dirtcraft.plugin.dirtcraftpokedex.Utility.CheckDex;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -16,9 +16,11 @@ import org.spongepowered.api.service.pagination.PaginationList;
 public class Check implements CommandExecutor {
 
     private final DirtCraftPokedex main;
+    private final CheckDex checkDex;
 
-    public Check(DirtCraftPokedex main) {
+    public Check(DirtCraftPokedex main, CheckDex checkDex) {
         this.main = main;
+        this.checkDex = checkDex;
     }
 
     @Override
@@ -27,33 +29,29 @@ public class Check implements CommandExecutor {
             Player player = (Player) source;
             EntityPlayerMP entity = (EntityPlayerMP) source;
 
-            CheckDex checkDex = new CheckDex();
 
             int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
-            double percent = Double.valueOf(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length - 2.0D) * 100.0D));
+            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) Pokedex.pokedexSize) * 100.0D));
 
             PaginationList.Builder pagination = PaginationList.builder();
 
-            pagination.title(main.format("&cDirtCraft &bPokédex"));
-            pagination.padding(main.format("&7&m-"));
-
-            if (percent == 100 && !player.hasPermission("group.pokemaster")) {
+            if (player.hasPermission("group.pokemaster")) {
 
                 checkDex.onCheck("Pokémaster", percent, player, entity, pagination);
 
-            } else if (percent < 100 && percent >= 70 && !player.hasPermission("group.ace")) {
+            } else if (player.hasPermission("group.ace")) {
 
                 checkDex.onCheck("Ace", percent, player, entity, pagination);
 
-            } else if (percent < 70 && percent >= 50 && !player.hasPermission("group.expert")) {
+            } else if (player.hasPermission("group.expert")) {
 
                 checkDex.onCheck("Expert", percent, player, entity, pagination);
 
-            } else if (percent < 50 && percent >= 30 && !player.hasPermission("group.knowledgable")) {
+            } else if (player.hasPermission("group.knowledgeable")) {
 
-                checkDex.onCheck("Knowledgable", percent, player, entity, pagination);
+                checkDex.onCheck("Knowledgeable", percent, player, entity, pagination);
 
-            } else if (percent < 30 && percent >= 10 && !player.hasPermission("group.intermedius")) {
+            } else if (player.hasPermission("group.intermedius")) {
 
                 checkDex.onCheck("Intermedius", percent, player, entity, pagination);
 

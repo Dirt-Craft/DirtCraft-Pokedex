@@ -1,9 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: org.spongepowered:configurate-yaml:3.6">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/spongepowered/configurate-yaml/3.6/configurate-yaml-3.6.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.4.1-all/caches/modules-2/files-2.1/org.spongepowered/configurate-yaml/3.6/10bbfb896119e6e72cceaab42f137936368132fb/configurate-yaml-3.6.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.4.1-all/caches/modules-2/files-2.1/org.spongepowered/configurate-yaml/3.6/abebdc32d9cdef99bcc52032811dde8d1e2f4a9f/configurate-yaml-3.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.4.1-all/caches/modules-2/files-2.1/org.spongepowered/configurate-yaml/3.6/b3fd47a0cd9c166eedebce1d844b1f3c200fc170/configurate-yaml-3.6-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

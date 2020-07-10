@@ -12,16 +12,6 @@
     </facet>
   </component>
   <component name="McpModuleSettings">
-    <option name="mappingFiles">
-      <set>
-        <option value="$USER_HOME$/.gradle/caches/minecraft/de/oceanlabs/mcp/mcp_stable/39/1.12.2/srgs/mcp-srg.srg" />
-        <option value="$USER_HOME$/.gradle/caches/minecraft/de/oceanlabs/mcp/mcp_stable/39/1.12.2/srgs/mcp-notch.srg" />
-        <option value="$USER_HOME$/.gradle/caches/minecraft/de/oceanlabs/mcp/mcp_stable/39/1.12.2/srgs/mcp.exc" />
-        <option value="$USER_HOME$/.gradle/caches/minecraft/de/oceanlabs/mcp/mcp_stable/39/1.12.2/srgs/notch-mcp.srg" />
-        <option value="$USER_HOME$/.gradle/caches/minecraft/de/oceanlabs/mcp/mcp_stable/39/1.12.2/srgs/notch-srg.srg" />
-        <option value="$USER_HOME$/.gradle/caches/minecraft/de/oceanlabs/mcp/mcp_stable/39/1.12.2/srgs/srg.exc" />
-      </set>
-    </option>
     <option name="mcpVersion" value="stable_39" />
     <option name="minecraftVersion" value="1.12.2" />
   </component>
@@ -33,7 +23,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/Pixelmon-1.12.2-7.0.5-universal.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/LuckPerms-Sponge-4.4.19.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -42,7 +32,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/deobfedDeps/compileDummy.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/Pixelmon-1.12.2-8.0.2-universal.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -51,14 +41,23 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/deobfedDeps/providedDummy.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.4.1-all/caches/minecraft/deobfedDeps/compileDummy.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Gradle: org.spongepowered:spongeapi:7.1.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Gradle: me.lucko.luckperms:luckperms-api:4.4" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.4.1-all/caches/minecraft/deobfedDeps/providedDummy.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Gradle: com.github.NucleusPowered:Nucleus:1.11.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.spongepowered:spongeapi:7.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" name="Gradle: com.google.inject:guice:4.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.spongepowered:plugin-meta:0.4.1" level="project" />
@@ -84,11 +83,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.12.2-14.23.5.2837/stable/39/forgeSrc-1.12.2-14.23.5.2837.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.4.1-all/caches/minecraft/net/minecraftforge/forge/1.12.2-14.23.5.2838/stable/39/forgeSrc-1.12.2-14.23.5.2838.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.12.2-14.23.5.2837/stable/39/forgeSrc-1.12.2-14.23.5.2837-sources.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.4.1-all/caches/minecraft/net/minecraftforge/forge/1.12.2-14.23.5.2838/stable/39/forgeSrc-1.12.2-14.23.5.2838-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -109,8 +108,8 @@
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.3.3" level="project" />
     <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.10" level="project" />
     <orderEntry type="library" name="Gradle: com.paulscode:librarylwjglopenal:20100824" level="project" />
-    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl_util:2.9.2-nightly-20140822" level="project" />
-    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl:2.9.2-nightly-20140822" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209" level="project" />
     <orderEntry type="library" name="Gradle: net.java.jinput:jinput:2.0.5" level="project" />
     <orderEntry type="library" name="Gradle: net.java.jutils:jutils:1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-compress:1.8.1" level="project" />
@@ -144,8 +143,8 @@
     <orderEntry type="library" name="Gradle: net.java.jinput:jinput-platform:natives-linux:2.0.5" level="project" />
     <orderEntry type="library" name="Gradle: net.java.jinput:jinput-platform:natives-windows:2.0.5" level="project" />
     <orderEntry type="library" name="Gradle: net.java.jinput:jinput-platform:natives-osx:2.0.5" level="project" />
-    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-windows:2.9.2-nightly-20140822" level="project" />
-    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.2-nightly-20140822" level="project" />
-    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.2-nightly-20140822" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-windows:2.9.4-nightly-20150209" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.4-nightly-20150209" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.4-nightly-20150209" level="project" />
   </component>
 </module>
