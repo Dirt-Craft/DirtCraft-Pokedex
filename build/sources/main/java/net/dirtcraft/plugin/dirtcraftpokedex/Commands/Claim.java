@@ -1,7 +1,7 @@
 package net.dirtcraft.plugin.dirtcraftpokedex.Commands;
 
 import com.pixelmonmod.pixelmon.Pixelmon;
-import com.pixelmonmod.pixelmon.pokedex.Pokedex;
+import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import io.github.nucleuspowered.nucleus.api.NucleusAPI;
 import io.github.nucleuspowered.nucleus.api.exceptions.KitRedeemException;
 import me.lucko.luckperms.LuckPerms;
@@ -36,7 +36,7 @@ public class Claim implements CommandExecutor {
             
             AtomicBoolean redeemedKit = new AtomicBoolean(false);
             int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
-            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) Pokedex.pokedexSize) * 100.0D));
+            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length) * 100.0D));
             PaginationList.Builder pagination = PaginationList.builder();
             if (percent == 100.0D) {
                 if (player.hasPermission("group.pokemaster")) {

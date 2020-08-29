@@ -1,7 +1,7 @@
 package net.dirtcraft.plugin.dirtcraftpokedex.Commands;
 
 import com.pixelmonmod.pixelmon.Pixelmon;
-import com.pixelmonmod.pixelmon.pokedex.Pokedex;
+import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import net.dirtcraft.plugin.dirtcraftpokedex.DirtCraftPokedex;
 import net.dirtcraft.plugin.dirtcraftpokedex.Utility.CheckDex;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -30,8 +30,8 @@ public class Check implements CommandExecutor {
             EntityPlayerMP entity = (EntityPlayerMP) source;
 
 
-            int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
-            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) Pokedex.pokedexSize) * 100.0D));
+            int caught = Pixelmon.storageManager.getParty((EntityPlayerMP) player).pokedex.countCaught();
+            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length) * 100.0D));
 
             PaginationList.Builder pagination = PaginationList.builder();
 

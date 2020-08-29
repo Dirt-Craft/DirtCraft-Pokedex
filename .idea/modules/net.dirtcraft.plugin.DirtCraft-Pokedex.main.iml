@@ -26,22 +26,13 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/LuckPerms-Sponge-4.4.19.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module" module-name="net.dirtcraft.plugin.DirtCraft-Pokedex.api" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/../../libs/Pixelmon-1.12.2-8.0.2-universal.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module" module-name="net.dirtcraft.plugin.DirtCraft-Pokedex.api" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -62,6 +53,7 @@
     </orderEntry>
     <orderEntry type="library" name="Gradle: com.github.NucleusPowered:Nucleus:1.11.0" level="project" />
     <orderEntry type="library" name="Gradle: org.spongepowered:spongeapi:7.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: me.lucko.luckperms:luckperms-api:4.4" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" name="Gradle: com.google.inject:guice:4.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.spongepowered:plugin-meta:0.4.1" level="project" />

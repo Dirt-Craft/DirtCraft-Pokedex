@@ -44,6 +44,7 @@ repositories {
 dependencies {
     compile 'org.spongepowered:spongeapi:7.1.0'
     compile "com.github.NucleusPowered:Nucleus:1.11.0"
+    compile 'me.lucko.luckperms:luckperms-api:4.4'
     compile fileTree(dir: 'libs', include: '*.jar')
 }
 

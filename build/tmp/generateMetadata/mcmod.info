@@ -1,33 +1,7 @@
 [
     {
         "modid": "dirtcraft-pokedex",
-        "name": "DirtCraft Pokedex",
-        "version": "1.0.0",
-        "description": "Pokedéx Rewards... remade for DirtCraft",
-        "url": "https://dirtcraft.net/",
-        "authorList": [
-            "juliann"
-        ],
-        "dependencies": [
-            "spongeapi@7.1.0"
-        ],
-        "requiredMods": [
-            "spongeapi@7.1.0"
-        ]
-    },
-    {
-        "modid": "DirtCraft-Pokedex",
-        "name": "DirtCraft Pokedex",
-        "version": "${version}",
-        "description": "Pokedex Rewards remade for DirtCraft",
-        "url": "https://dirtcraft.net/",
-        "authorList": [
-            "juliann"
-        ],
-        "mcversion": "${mcversion}",
-        "updateUrl": "",
-        "credits": "",
-        "logoFile": "",
-        "screenshots": []
+        "name": "DirtCraft-Pokedex",
+        "version": "1.0.0"
     }
 ]

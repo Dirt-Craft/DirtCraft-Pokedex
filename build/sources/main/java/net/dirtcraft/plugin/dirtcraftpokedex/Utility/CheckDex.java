@@ -2,7 +2,7 @@ package net.dirtcraft.plugin.dirtcraftpokedex.Utility;
 
 import com.google.common.collect.Lists;
 import com.pixelmonmod.pixelmon.Pixelmon;
-import com.pixelmonmod.pixelmon.pokedex.Pokedex;
+import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.Node;
 import me.lucko.luckperms.api.User;
@@ -36,7 +36,7 @@ public class CheckDex {
         EntityPlayerMP entity = (EntityPlayerMP) player;
 
         int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
-        double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) Pokedex.pokedexSize) * 100.0D));
+        double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length) * 100.0D));
 
         PaginationList.Builder pagination = PaginationList.builder();
 
@@ -146,7 +146,7 @@ public class CheckDex {
                                     "&7Rank&8: &6" + lpRank + "\n" +
                                             "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                             "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                "&7Total Pokémon&8: &6" + Pokedex.pokedexSize)))
+                                                "&7Total Pokémon&8: &6" + EnumSpecies.values().length)))
                             .build());
         }
         pagination.sendTo(player);
