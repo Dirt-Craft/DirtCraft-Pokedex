@@ -21,10 +21,12 @@ import java.text.DecimalFormat;
 @Plugin(
         id = "dirtcraft-pokedex",
         name = "DirtCraft Pokedex",
+        version = "1.0.1",
         description = "Pokedéx Rewards... remade for DirtCraft",
         url = "https://dirtcraft.net/",
         authors = {
-                "juliann"
+                "juliann",
+                "Combi"
         }
 )
 public class DirtCraftPokedex {

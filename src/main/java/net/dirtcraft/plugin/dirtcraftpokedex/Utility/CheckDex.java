@@ -36,7 +36,8 @@ public class CheckDex {
         EntityPlayerMP entity = (EntityPlayerMP) player;
 
         int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
-        double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length) * 100.0D));
+        // -1 Because you can't obtain 1 Pokemon
+        double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length -1) * 100.0D));
 
         PaginationList.Builder pagination = PaginationList.builder();
 
@@ -146,7 +147,7 @@ public class CheckDex {
                                     "&7Rank&8: &6" + lpRank + "\n" +
                                             "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                             "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                "&7Total Pokémon&8: &6" + EnumSpecies.values().length)))
+                                                "&7Total Pokémon&8: &6" + (EnumSpecies.values().length - 1))))
                             .build());
         }
         pagination.sendTo(player);

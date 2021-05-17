@@ -39,30 +39,31 @@ public class List implements CommandExecutor {
             ArrayList<Text> contents = new ArrayList<>();
 
             int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
-            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length) * 100.0D));
+            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) (EnumSpecies.values().length - 1)) * 100.0D));
 
             Pokedex playerDex = Pixelmon.storageManager.getParty(entity).pokedex;
 
             Arrays.stream(EnumSpecies.values()).sorted(Comparator.comparing(EnumSpecies::name)).forEach(species -> {
 
-                if (playerDex.hasCaught(Pokedex.nameToID(species.name))) {
-                    contents.add(
-                            Text.builder()
-                            .append(main.format("&7" + species + "&r " + "&a&l✓"))
-                            .onHover(TextActions.showText(main.format("&aYou have caught this pokémon")))
-                            .build()
-                    );
-                    //contents.add(main.format("&7" + species.name + " &a✓"));
-                } else {
-                    contents.add(
-                            Text.builder()
-                                    .append(main.format("&7" + species + "&r " + "&c&l✗"))
-                                    .onHover(TextActions.showText(main.format("&cYou have not caught this pokémon")))
-                                    .build()
-                    );
-                    //contents.add(main.format("&7" + species.name + " &c✗"));
+                if(!species.name.equals("MissingNo")) {
+                    if (playerDex.hasCaught(Pokedex.nameToID(species.name))) {
+                        contents.add(
+                                Text.builder()
+                                        .append(main.format("&7" + species + "&r " + "&a&l✓"))
+                                        .onHover(TextActions.showText(main.format("&aYou have caught this pokémon")))
+                                        .build()
+                        );
+                        //contents.add(main.format("&7" + species.name + " &a✓"));
+                    } else {
+                        contents.add(
+                                Text.builder()
+                                        .append(main.format("&7" + species + "&r " + "&c&l✗"))
+                                        .onHover(TextActions.showText(main.format("&cYou have not caught this pokémon")))
+                                        .build()
+                        );
+                        //contents.add(main.format("&7" + species.name + " &c✗"));
+                    }
                 }
-
             });
 
             PaginationList.Builder pagination = PaginationList.builder();
@@ -87,7 +88,7 @@ public class List implements CommandExecutor {
                                         "&7Rank&8: &6" + (lpRank.equalsIgnoreCase("pokemaster") ? pokemaster : lpRank) + "\n" +
                                                 "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                                 "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                "&7Total Pokémon&8: &6" + EnumSpecies.values().length)))
+                                                "&7Total Pokémon&8: &6" + (EnumSpecies.values().length-1))))
                                 .build());
             } catch (Exception exception) {
                     pagination.footer(
@@ -96,7 +97,7 @@ public class List implements CommandExecutor {
                                     .onHover(TextActions.showText(main.format(
                                                     "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                                     "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                    "&7Total Pokémon&8: &6" + EnumSpecies.values().length)))
+                                                    "&7Total Pokémon&8: &6" + (EnumSpecies.values().length-1))))
                                     .build());
 
                 }

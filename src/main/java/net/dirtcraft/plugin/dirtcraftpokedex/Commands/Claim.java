@@ -36,7 +36,7 @@ public class Claim implements CommandExecutor {
             
             AtomicBoolean redeemedKit = new AtomicBoolean(false);
             int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
-            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length) * 100.0D));
+            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) (EnumSpecies.values().length - 1)) * 100.0D));
             PaginationList.Builder pagination = PaginationList.builder();
             if (percent == 100.0D) {
                 if (player.hasPermission("group.pokemaster")) {

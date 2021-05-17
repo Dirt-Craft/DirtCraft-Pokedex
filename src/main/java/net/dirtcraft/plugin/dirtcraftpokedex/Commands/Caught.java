@@ -39,7 +39,8 @@ public class Caught implements CommandExecutor {
             ArrayList<Text> contents = new ArrayList<>();
 
             int caught = Pixelmon.storageManager.getParty(entity).pokedex.countCaught();
-            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length) * 100.0D));
+            // -1 Because you can't obtain 1 Pokemon
+            double percent = Double.parseDouble(main.decimalFormat.format((double) caught / ((double) EnumSpecies.values().length -1) * 100.0D));
 
             Pokedex playerDex = Pixelmon.storageManager.getParty(entity).pokedex;
 
@@ -80,7 +81,7 @@ public class Caught implements CommandExecutor {
                                             "&7Rank&8: &6" + pokemaster + "\n" +
                                                     "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                                     "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                    "&7Total Pokémon&8: &6" + EnumSpecies.values().length)))
+                                                    "&7Total Pokémon&8: &6" + (EnumSpecies.values().length-1))))
                                     .build());
 
                 } else {
@@ -91,7 +92,7 @@ public class Caught implements CommandExecutor {
                                             "&7Rank&8: &6" + lpRank + "\n" +
                                                     "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                                     "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                    "&7Total Pokémon&8: &6" + EnumSpecies.values().length)))
+                                                    "&7Total Pokémon&8: &6" + (EnumSpecies.values().length-1))))
                                     .build());
                 }
             } catch (NullPointerException exception) {
@@ -101,7 +102,7 @@ public class Caught implements CommandExecutor {
                                 .onHover(TextActions.showText(main.format(
                                         "&7Pokédex Complete&8: &6" + percent + "%\n" +
                                                 "&7Pokémon Caught&8: &6" + Pixelmon.storageManager.getParty(entity).pokedex.countCaught() + "\n" +
-                                                "&7Total Pokémon&8: &6" + EnumSpecies.values().length)))
+                                                "&7Total Pokémon&8: &6" + (EnumSpecies.values().length-1))))
                                 .build());
 
             }
